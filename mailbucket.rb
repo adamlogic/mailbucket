@@ -37,10 +37,10 @@ end
 
 class Hash
   def to_paragraphs
-    paragraphs = ''
+    paragraphs = []
     each do |k,v|
-      paragraphs << "#{k.to_s.upcase.gsub(/_/, ' ')}\n\n#{v.to_s}\n\n"
+      paragraphs << [k.to_s.upcase.gsub(/_/, ' '), v.to_s].join("\n\n")
     end
-    paragraphs
+    paragraphs.join "\n\n-----\n\n"
   end
 end
