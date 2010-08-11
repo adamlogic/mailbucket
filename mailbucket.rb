@@ -2,13 +2,15 @@ require 'sinatra'
 require 'pony'
 
 post '/' do
+  redirect_url = params.delete('redirect')
+
   Mailer.mail :to => ENV['MAIL_RECIPIENT'],
               :from_email => params.delete('email') || ENV['MAIL_RECIPIENT'],
               :from_name => params.delete('name'),
               :subject => params.delete('subject'),
               :body => params.to_paragraphs
 
-  redirect back
+  redirect(redirect_url || back)
 end
 
 module Mailer
