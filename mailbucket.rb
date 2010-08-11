@@ -3,9 +3,9 @@ require 'pony'
 
 post '/' do
   Mailer.mail :to => ENV['MAIL_RECIPIENT'],
-              :from_email => params.delete(:email) || ENV['MAIL_RECIPIENT'],
-              :from_name => params.delete(:name),
-              :subject => params.delete(:subject),
+              :from_email => params.delete('email') || ENV['MAIL_RECIPIENT'],
+              :from_name => params.delete('name'),
+              :subject => params.delete('subject'),
               :body => params.to_paragraphs
 
   redirect back
@@ -37,7 +37,7 @@ class Hash
   def to_paragraphs
     paragraphs = ''
     each do |k,v|
-      paragraphs << [ k.to_s.upcase, '', v.to_s, '' ].join("\n")
+      paragraphs << "#{k.to_s.upcase.gsub(/_/,'')}\n\n#{v.to_s}\n\n"
     end
     paragraphs
   end
