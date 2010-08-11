@@ -26,7 +26,7 @@ module Mailer
               }
   end
 
-  def from(email, name = nil)
+  def self.from(email, name = nil)
     name ? "#{name} <#{email}>" : email
   end
 end
