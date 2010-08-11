@@ -16,7 +16,7 @@ end
 module Mailer
   def self.mail(options)
     Pony.mail :to => options[:to],
-              :from => options[:from] || from(options[:from_email], options[:from_name]),
+              :from => from(options[:from_email], options[:from_name]),
               :subject => options[:subject] || '',
               :body => options[:body], 
               :via => :smtp, 
