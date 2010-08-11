@@ -14,7 +14,7 @@ end
 module Mailer
   def self.mail(options)
     Pony.mail :to => options[:to],
-              :from => options[:from] || from(options[:email], options[:name]),
+              :from => options[:from] || from(options[:from_email], options[:from_name]),
               :subject => options[:subject] || '',
               :body => options[:body], 
               :via => :smtp, 
@@ -37,7 +37,7 @@ class Hash
   def to_paragraphs
     paragraphs = ''
     each do |k,v|
-      paragraphs << "#{k.to_s.upcase.gsub(/_/,'')}\n\n#{v.to_s}\n\n"
+      paragraphs << "#{k.to_s.upcase.gsub(/_/, ' ')}\n\n#{v.to_s}\n\n"
     end
     paragraphs
   end
