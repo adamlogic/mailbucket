@@ -7,6 +7,8 @@ post '/' do
               :from_name => params.delete(:name),
               :subject => params.delete(:subject),
               :body => params.to_paragraphs
+
+  redirect back
 end
 
 module Mailer
