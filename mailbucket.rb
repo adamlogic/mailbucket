@@ -6,8 +6,8 @@ post '/' do
 
   Mailer.mail :to => ENV['MAIL_RECIPIENT'],
               :from_email => params.delete('email') || ENV['MAIL_RECIPIENT'],
-              :from_name => params.delete('name'),
-              :subject => params.delete('subject'),
+              :from_name => params.delete('name') || '',
+              :subject => params.delete('subject') || '',
               :body => params.to_paragraphs
 
   redirect(redirect_url || back)
@@ -18,8 +18,8 @@ module Mailer
     Pony.mail :to => options[:to],
               :from => from(options[:from_email], options[:from_name]),
               :subject => options[:subject] || '',
-              :body => options[:body], 
-              :via => :smtp, 
+              :body => options[:body] || '',
+              :via => :smtp,
               :via_options => {
                 :address => 'smtp.sendgrid.net',
                 :port => '25',
