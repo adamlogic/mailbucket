@@ -15,6 +15,8 @@ end
 
 module Mailer
   def self.mail(options)
+    puts "----------------------------"
+    puts "Attempting to send email..."
     Pony.mail :to => options[:to],
               :from => from(options[:from_email], options[:from_name]),
               :subject => options[:subject] || '',
