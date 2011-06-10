@@ -15,24 +15,22 @@ end
 
 module Mailer
   def self.mail(options)
-    puts "----------------------------"
-    puts "Attempting to send email..."
-    Pony.mail :to => options[:to],
-              :from => from(options[:from_email], options[:from_name]),
+    Pony.mail :to      => options[:to],
+              :from    => from(options[:from_email], options[:from_name]),
               :subject => options[:subject] || '',
-              :body => options[:body] || '',
-              :via => :smtp,
+              :body    => options[:body] || '',
+              :via     => :smtp,
               :via_options => {
-                :address => 'smtp.sendgrid.net',
-                :port => '25',
-                :user_name => ENV['SENDGRID_USERNAME'],
-                :password => ENV['SENDGRID_PASSWORD'],
+                :address        => 'smtp.sendgrid.net',
+                :port           => '25',
+                :user_name      => ENV['SENDGRID_USERNAME'],
+                :password       => ENV['SENDGRID_PASSWORD'],
                 :authentication => :plain,
-                :domain => ENV['SENDGRID_DOMAIN']
+                :domain         => ENV['SENDGRID_DOMAIN']
               }
   end
 
-  def self.from(email, name = nil)
+  def self.from(email = 'none@noemailentered.com', name = nil)
     name ? "#{name} <#{email}>" : email
   end
 end
